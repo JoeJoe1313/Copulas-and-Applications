@@ -9,6 +9,7 @@
 
 * https://proceedings.neurips.cc/paper/2020/file/10eb6500bd1e4a3704818012a1593cc3-Paper.pdf
 * https://res.mdpi.com/d_attachment/jrfm/jrfm-13-00285/article_deploy/jrfm-13-00285-v3.pdf
+* https://papers.nips.cc/paper/2019/file/15e122e839dfdaa7ce969536f94aecf6-Paper.pdf
 
 ### Financial Time Series
 
@@ -19,3 +20,5 @@
 
 * https://arxiv.org/pdf/2009.09471.pdf
 * https://ojs.aaai.org/index.php/AAAI/article/download/4437/4315
+
+https://spiral.imperial.ac.uk:8443/bitstream/10044/1/61964/2/AS6511075419914241532247543864_content_1.pdf
