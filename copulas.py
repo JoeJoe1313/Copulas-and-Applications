@@ -24,32 +24,35 @@ def plot_random_variable(random_variable_1, random_variable_2, random_variable_3
 
 
 def plot_contour(copula_function, name):
-    u = np.linspace(0, 1, 10)
-    v = np.linspace(0, 1, 10)
+    u = np.linspace(0, 1, 1000)
+    v = np.linspace(0, 1, 1000)
     U, V = np.meshgrid(u, v)
     Z = copula_function(U, V)
 
-    fig = plt.figure()
     ax = plt.axes(projection='3d')
-    ax.contour3D(U, V, Z, 50, cmap='viridis')
+    ax.contour3D(U, V, Z, 40, cmap='viridis')
     ax.set_xlabel('u')
     ax.set_ylabel('v')
     ax.set_zlabel('z')
     ax.set_title(f'{name} copula')
+    ax.view_init(20, -90)
 
     plt.tight_layout()
     plt.show()
 
 
-def plot_surface(copula_function, name):
-    u = np.linspace(0, 1, 10)
-    v = np.linspace(0, 1, 10)
+def plot_contour2d(copula_function, name):
+    u = np.linspace(0, 1, 1000)
+    v = np.linspace(0, 1, 1000)
     U, V = np.meshgrid(u, v)
     Z = copula_function(U, V)
 
-    ax = plt.axes(projection='3d')
-    ax.plot_surface(U, V, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='black')
-    ax.set_title(f'{name} copula')
+    _, ax = plt.subplots(1, 1)
+    ax.contourf(U, V, Z)
+    ax.set_xlabel('u')
+    ax.set_ylabel('v')
+    ax.set_title(f'{name} copula contour plot')
+    ax.set_aspect('equal')
 
     plt.tight_layout()
     plt.show()
