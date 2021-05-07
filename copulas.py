@@ -35,7 +35,7 @@ def plot_contour(copula_function, name):
     ax.set_ylabel('v')
     ax.set_zlabel('z')
     ax.set_title(f'{name} copula')
-    ax.view_init(20, -90)
+    ax.view_init(20, -80)
 
     plt.tight_layout()
     plt.show()
@@ -75,18 +75,25 @@ def plot_mo(lambdas, r, s, t):
     plt.show()
 
 
-def plot_amh(thetas: list, u, t):
-    _, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30, 10))
-    axes = [ax1, ax2, ax3]
+def plot_amh(thetas: list, u, t, copula_function):
+    fig = plt.figure(figsize=(30, 20))
+    axes_1 = [1, 2, 3]
+    axes_2 = [4, 5, 6]
 
-    for theta, ax in zip(thetas, axes):
+    for theta, ax_1, ax_2 in zip(thetas, axes_1, axes_2):
         a = 1 - u
         b = - theta * (2 * a * t + 1) + 2 * (theta ** 2) * (a ** 2) * t + 1
         c = (theta ** 2) * (4 * (a ** 2) * t - 4 * a * t + 1) - theta * (4 * a * t - 4 * t + 2) + 1
         v = (2 * t * ((a * theta - 1) ** 2)) / (b + (c ** 0.5))
 
-        ax.scatter(u, v)
-        ax.set_title(f'theta = {theta}', size=20)
+        ax1 = fig.add_subplot(2, 3, ax_1)
+        ax1.scatter(u, v)
+        ax1.set_title(f'theta = {theta}', size=20)
+        ax1.set_aspect('equal')
+
+        ax2 = fig.add_subplot(2, 3, ax_2, projection='3d')
+        ax2.scatter(u, v, copula_function(u, v))
+        # ax2.view_init(20, -80)
 
     plt.tight_layout()
     plt.show()
