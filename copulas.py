@@ -93,7 +93,7 @@ def plot_amh(thetas: list, u, t, copula_function):
 
         ax2 = fig.add_subplot(2, 3, ax_2, projection='3d')
         ax2.scatter(u, v, copula_function(u, v))
-        # ax2.view_init(20, -80)
+        ax2.view_init(20, -135)
 
     plt.tight_layout()
     plt.show()
