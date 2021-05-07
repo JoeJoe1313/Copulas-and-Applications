@@ -58,18 +58,26 @@ def plot_contour2d(copula_function, name):
     plt.show()
 
 
-def plot_mo(lambdas, r, s, t):
-    _, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30, 10))
-    axes = [ax1, ax2, ax3]
+def plot_mo(lambdas, r, s, t, copula_function):
+    fig = plt.figure(figsize=(30, 20))
+    axes_1 = [1, 2, 3]
+    axes_2 = [4, 5, 6]
 
-    for lambd, ax in zip(lambdas, axes):
+    for lambd, ax_1, ax_2 in zip(lambdas, axes_1, axes_2):
         x = np.minimum(-(np.log(r) / lambd[0]), -(np.log(t) / lambd[2]))
         y = np.minimum(-(np.log(s) / lambd[1]), -(np.log(t) / lambd[2]))
 
         u = np.exp(-(lambd[0] + lambd[2]) * x)
         v = np.exp(-(lambd[1] + lambd[2]) * y)
-        ax.scatter(u, v)
-        ax.set_title(f'lambda1 = {lambd[0]}, lambda2 = {lambd[1]}, lambda12 = {lambd[2]}')
+
+        ax1 = fig.add_subplot(2, 3, ax_1)
+        ax1.scatter(u, v)
+        ax1.set_title(f'lambda1 = {lambd[0]}, lambda2 = {lambd[1]}, lambda12 = {lambd[2]}')
+        ax1.set_aspect('equal')
+
+        ax2 = fig.add_subplot(2, 3, ax_2, projection='3d')
+        ax2.scatter(u, v, copula_function(u, v))
+        ax2.view_init(20, -135)
 
     plt.tight_layout()
     plt.show()
@@ -99,19 +107,26 @@ def plot_amh(thetas: list, u, t, copula_function):
     plt.show()
 
 
-def plot_plackett(thetas: list, u, t):
-    _, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30, 10))
-    axes = [ax1, ax2, ax3]
+def plot_plackett(thetas: list, u, t, copula_function):
+    fig = plt.figure(figsize=(30, 20))
+    axes_1 = [1, 2, 3]
+    axes_2 = [4, 5, 6]
 
-    for theta, ax in zip(thetas, axes):
+    for theta, ax_1, ax_2 in zip(thetas, axes_1, axes_2):
         a = t * (1 - t)
         b = theta + a * (theta - 1) ** 2
         c = 2 * a * (u * (theta ** 2) + 1 - u) + theta * (1 - 2 * a)
         d = (theta ** 0.5) * (theta + 4 * a * u * (1 - u) * (1 - theta) ** 2) ** 0.5
         v = (c - (1 - 2 * t) * d) / (2 * b)
 
-        ax.scatter(u, v)
-        ax.set_title(f'theta = {theta}', size=20)
+        ax1 = fig.add_subplot(2, 3, ax_1)
+        ax1.scatter(u, v)
+        ax1.set_title(f'theta = {theta}', size=20)
+        ax1.set_aspect('equal')
+
+        ax2 = fig.add_subplot(2, 3, ax_2, projection='3d')
+        ax2.scatter(u, v, copula_function(u, v))
+        ax2.view_init(20, -135)
 
     plt.tight_layout()
     plt.show()
