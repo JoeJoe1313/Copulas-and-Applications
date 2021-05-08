@@ -130,3 +130,26 @@ def plot_plackett(thetas: list, u, t, copula_function):
 
     plt.tight_layout()
     plt.show()
+
+
+def plot_fgm(thetas: list, u, t, copula_function):
+    fig = plt.figure(figsize=(30, 20))
+    axes_1 = [1, 2, 3]
+    axes_2 = [4, 5, 6]
+
+    for theta, ax_1, ax_2 in zip(thetas, axes_1, axes_2):
+        a = 1 + theta * (1 - 2 * u)
+        b = (a ** 2 - 4 * (a - 1) * t) ** 0.5
+        v = 2 * t / (b + a)
+
+        ax1 = fig.add_subplot(2, 3, ax_1)
+        ax1.scatter(u, v)
+        ax1.set_title(f'theta = {theta}', size=20)
+        ax1.set_aspect('equal')
+
+        ax2 = fig.add_subplot(2, 3, ax_2, projection='3d')
+        ax2.scatter(u, v, copula_function(u, v))
+        ax2.view_init(20, -135)
+
+    plt.tight_layout()
+    plt.show()
