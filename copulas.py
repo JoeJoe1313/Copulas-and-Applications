@@ -58,6 +58,21 @@ def plot_contour2d(copula_function, name):
     plt.show()
 
 
+def plot_surface(copula_function, name):
+    u = np.linspace(0, 1, 10)
+    v = np.linspace(0, 1, 10)
+    U, V = np.meshgrid(u, v)
+    Z = copula_function(U, V)
+
+    ax = plt.axes(projection='3d')
+    ax.plot_surface(U, V, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='black')
+    ax.set_title(f'{name} copula')
+    ax.view_init(20, -135)
+
+    plt.tight_layout()
+    plt.show()
+
+
 def plot_mo(lambdas, r, s, t, copula_function):
     fig = plt.figure(figsize=(30, 20))
     axes_1 = [1, 2, 3]
